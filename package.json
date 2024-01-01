@@ -1,5 +1,13 @@
-{ "dependencies": { "tailwindcss": "^3.4.0" }, "name": "hr-management", "module": "index.ts", "type": "module", "devDependencies": {
-  "@types/bun": "latest"
-}, "peerDependencies": {
-  "typescript": "^5.0.0"
-} }
+{
+  "dependencies": {
+    "tailwindcss": "^3.4.0"
+  },
+  "name": "hr-management",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "scripts": {
+    "dev": "tailwindcss -i ./assets/styles/style.css -o ./dist/output.css --watch"
+  }
+}
