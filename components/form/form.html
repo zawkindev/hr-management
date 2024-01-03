@@ -13,10 +13,9 @@
 </head>
 
 <body>
-  <div class="w-screen h-screen items-center">
-    <form class="flex flex-col justify-center items-center gap-10">
-      <div class="grid grid-cols-2 gap-10 w-2/6 box-border">
-
+  <div class="flex flex-1 justify-center items-center h-screen"> <!-- to center the form -->
+    <form class="flex flex-col justify-center items-center gap-10 border border-gray-300 p-10 w-fit rounded-xl">
+      <div class="grid grid-cols-2 gap-10 box-border w-fit">
         <div class="flex flex-col justify-between">
           <h6 class="block antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
             Your Full Name
@@ -42,10 +41,15 @@
             Department
           </h6>
           <div class="h-11 w-full min-w-[200px]">
-            <input type="" id="first_name"
-              class="bg-transparent border outline outline-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-slate-950 focus:outline-2 block w-full p-2.5"
-              placeholder="22" required>
+            <select required
+              class="bg-transparent border outline outline-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-slate-950 focus:outline-2 block w-full p-2.5">
+              <option value="Accounting">Accounting</option>
+              <option value="IT">IT</option>
+              <option value="Marketing">Marketing</option>
+              <option value="SMM">SMM</option>
+            </select>
           </div>
+
         </div>
         <div class="flex flex-col gap-3">
           <h6 class="block antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
@@ -54,7 +58,7 @@
           <div class="h-11 w-full min-w-[200px]">
             <input type="text" id="first_name"
               class="bg-transparent border outline outline-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-slate-950 focus:outline-2 block w-full p-2.5"
-              placeholder="22" required>
+              placeholder="Position" required>
           </div>
         </div>
         <div class="flex flex-col gap-3">
@@ -81,7 +85,7 @@
               </div>
               <div class="inline-flex items-center">
                 <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="react">
-                  <input name="type" type="radio"
+                  <input name="type" type="radio" required
                     class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-gray-900 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
                     id="female" />
                   <span
@@ -103,7 +107,7 @@
             Date Of Birth
           </h6>
           <div class="h-11 w-full min-w-[200px]">
-            <input type="date" id="birthday"
+            <input type="date" id="birthday" min="1963-01-01" max="2009-01-01"
               class="bg-transparent border outline outline-0 border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-slate-950 focus:outline-2 block w-full p-2.5"
               placeholder="22" required>
           </div>
@@ -111,11 +115,10 @@
 
       </div>
       <div class="w-36 self-center justify-center items-center flex">
-        <button
+        <input
           class="btn bg-slate-950 border w-full border-slate-950 transition-all duration-200 font-bold text-sky-50 p-4 rounded-lg active:text-slate-950 active:bg-sky-50"
-          role=" button" type="button">
-          Submit
-        </button>
+          role=" button" type="submit" value="Submit" />
+
       </div>
     </form>
   </div>
