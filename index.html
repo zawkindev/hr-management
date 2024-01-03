@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link href="/dist/output.css" rel="stylesheet">
+    <link href="/assets/styles/style.css" rel="stylesheet">
+    <link href="/assets/icomoon/style.css" rel="stylesheet">
+    <title>Input</title>
+</head>
+
+<body>
+<div class="flex">
+    <aside
+            class="float-left border-r border-gray-300 flex h-screen max-w-[20rem] flex-col bg-gray-100 p-4 text-gray-300">
+        <div class="p-4 mb-2">
+            <h5 class="block  text-2xl antialiased  font-semibold leading-snug tracking-normal text-gray-900">
+                Dashboard
+            </h5>
+        </div>
+        <div
+                class="flex min-w-[240px] h-full flex-col justify-between gap-1 p-2 py-8 capitalize text-gray-800 duration-200">
+            <div class="dashboard flex flex-col text-3xl">
+                <button class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all rounded-lg outline-none text-start hover:bg-gray-300 hover:bg-opacity-80 hover:text-gray-900  focus:bg-slate-950 focus:text-sky-50"
+                        id="home"
+                        onclick="">
+                    <span class="icon-home text-2xl"></span>
+                    Home
+                </button>
+                <button class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all rounded-lg outline-none text-start hover:bg-gray-300 hover:bg-opacity-80 hover:text-gray-900  focus:bg-slate-950 focus:text-sky-50"
+                        id="table"
+                        onclick="renderTable(employees)"
+                        role="button">
+                    <span class="icon-table2 text-2xl"></span>
+                    Table
+                </button>
+                <button class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all rounded-lg outline-none text-start hover:bg-gray-300 hover:bg-opacity-80 hover:text-gray-900  focus:bg-slate-950 focus:text-sky-50"
+                        id="employee"
+                        onclick="renderForm([])">
+                    <span class="icon-user-plus text-2xl"></span>
+                    Add Employee
+                </button>
+                <button class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all rounded-lg outline-none text-start hover:bg-gray-300 hover:bg-opacity-80 hover:text-gray-900  focus:bg-slate-950 focus:text-sky-50"
+                        id="editForm"
+                        onclick="renderEditForm([])">
+                    <span class="icon-edit text-2xl"></span>
+                    Edit
+                </button>
+            </div>
+            <button
+                    class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all rounded-lg outline-none text-start hover:bg-gray-300 hover:text-gray-900 active:bg-slate-950 active:text-sky-50">
+                <span class="icon-log-out text-2xl"></span>
+                Log Out
+            </button>
+        </div>
+    </aside>
+
+    <div class="flex flex-col gap-20 justify-center items-center h-min-screen w-full" id="render">
+        <!-- to center the form -->
+    </div>
+</div>
+<script src="components/form/form.js"></script>
+<script src="components/table/table.js"></script>
+<script src="js/main.js"></script>
+</body>
+
+</html>
