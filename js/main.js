@@ -130,3 +130,51 @@ function replaceEmployee(employeesArray, idToReplace, newEmployee) {
 function addNewEmployee(employeesArray, newEmployee) {
     employeesArray.push(newEmployee);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function saveToLocalStorage(data) {
+    try {
+        const serializedData = JSON.stringify(data);
+        localStorage.setItem("hr-management", serializedData);
+        console.log(`Data saved to local storage`);
+    } catch (error) {
+        console.error("Error saving data to local storage:", error);
+    }
+}
+
+// Function to fetch data from local storage
+function fetchFromLocalStorage() {
+    try {
+        const serializedData = localStorage.getItem("hr-management");
+        if (serializedData === null) {
+            console.log(`No data found in local storage`);
+            return null;
+        }
+
+        const data = JSON.parse(serializedData);
+        console.log(`Data fetched from local storage`);
+        return data;
+    } catch (error) {
+        console.error("Error fetching data from local storage:", error);
+        return null;
+    }
+}
