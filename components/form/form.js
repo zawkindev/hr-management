@@ -132,7 +132,6 @@ function submitForm(e) {
     // Retrieve values
     e.preventDefault()
     const id = document.querySelector('form').id
-
     const name = document.getElementById('name').value;
     const age = document.getElementById('age').value;
     const department = document.getElementById('department').value;
@@ -163,7 +162,29 @@ function submitForm(e) {
         const renderHere= document.querySelector("#render")
         renderHere.querySelector("table").remove()
         renderHere.appendChild(createTableElement([employeeObject]))
+        saveToLocalStorage(employees)
     } else {
         addNewEmployee(employees, employeeObject)
+        const renderHere= document.querySelector("#render")
+        try{
+            renderHere.querySelector("table").remove()
+        }catch (e) {
+            // console.log(e)
+        }
+        renderHere.appendChild(createTableElement([employeeObject]))
+        saveToLocalStorage(employees)
+        clearInputs()
     }
+}
+
+function clearInputs() {
+    const inputElements = document.querySelectorAll('input, select');
+
+    inputElements.forEach(input => {
+        if (input.type === 'text' || input.type === 'number' || input.type === 'date' || input.type === 'select-one') {
+            input.value = '';
+        } else if (input.type === 'radio' || input.type === 'checkbox') {
+            input.checked = false;
+        }
+    });
 }

@@ -1,4 +1,4 @@
-const employees = [
+const employees = fetchFromLocalStorage() || [
     {
         id: 1,
         name: "John Doe",
@@ -114,10 +114,9 @@ function updateFormWithEmployeeData(employee) {
 }
 
 function generateUniqueId() {
-    const timestamp = Date.now().toString(36); // Convert current timestamp to base36
-    const randomString = Math.random().toString(36).substr(2, 5); // Random string (excluding "0." at the beginning)
+    const randomString = Math.random(); // Random string (excluding "0." at the beginning)
 
-    return `${timestamp}-${randomString}`;
+    return randomString;
 }
 
 function replaceEmployee(employeesArray, idToReplace, newEmployee) {
@@ -131,7 +130,21 @@ function addNewEmployee(employeesArray, newEmployee) {
     employeesArray.push(newEmployee);
 }
 
+function deleteEmployee(employeeID) {
 
+    // localStorage.clear()
+    const indexToDelete = employees.findIndex(employee => employee.id.toString() === employeeID.toString());
+    if (indexToDelete !== -1) {
+        employees.splice(indexToDelete, 1);
+        console.log(`Employee with ID ${employeeID} deleted`);
+    } else {
+        console.log(`Employee with ID ${employeeID} not found`);
+    }
+    document.querySelector("table").remove()
+    renderHere.appendChild(createTableElement(employees))
+    saveToLocalStorage(employees)
+
+}
 
 
 

@@ -119,7 +119,7 @@ function createTableElement(employees) {
           </td>
           <td class="p-4  items-center content-center gap-7 h-max">
             <button onclick="renderEditForm(${user.id})" class="edit-button block antialiased font-medium leading-normal text-blue-500">Edit</button>
-            <button class="block antialiased font-medium leading-normal text-red-500">Delete</button>
+            <button onclick="deleteEmployee(${user.id})" class="block antialiased font-medium leading-normal text-red-500">Delete</button>
           </td>
         </tr>
         `;
