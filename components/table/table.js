@@ -45,7 +45,7 @@ function createTableElement(employees) {
     `;
 
     // Table body with employee data
-    if (employees.length===0){
+    if (employees.length===0 || employees[0] === undefined){
         table.innerHTML += `
         <tr class="bg-slate-50">
           <td class="p-4">
@@ -84,10 +84,9 @@ function createTableElement(employees) {
         </tr>
         `
     }else {
-
         employees.forEach((user, index) => {
             table.innerHTML += `
-        <tr id="${user.id}" class="${index % 2 === 0 ? 'bg-slate-50' : 'bg-slate-100'}">
+        <tr id="${user.id}" class="${index % 2 !== 0 ? 'bg-slate-50' : 'bg-slate-100'}">
           <td class="p-4">
             <p class="block antialiased font-normal leading-normal">
               ${user.name}
@@ -119,7 +118,7 @@ function createTableElement(employees) {
             </p>
           </td>
           <td class="p-4  items-center content-center gap-7 h-max">
-            <button class="block antialiased font-medium leading-normal text-blue-500">Edit</button>
+            <button onclick="renderEditForm(${user.id})" class="edit-button block antialiased font-medium leading-normal text-blue-500">Edit</button>
             <button class="block antialiased font-medium leading-normal text-red-500">Delete</button>
           </td>
         </tr>

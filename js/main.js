@@ -52,7 +52,7 @@ function clearRender() {
     renderHere.innerHTML = ``
 }
 
-function renderTable(employees, e) {
+function renderTable(employees) {
     mark(document.querySelector("#table"))
     clearRender()
     const tableElement = createTableElement(employees)
@@ -60,19 +60,30 @@ function renderTable(employees, e) {
 }
 
 function renderForm() {
-    mark(document.querySelector("#employee"))
+    mark(document.querySelector("#addEmployee"))
     clearRender()
-    const formElement = createFormElement()
+    const uniqueID = generateUniqueId()
+    const formElement = createFormElement(uniqueID)
     renderHere.appendChild(formElement)
+    const submitButton = document.querySelector("input[type='submit']")
+    submitButton.addEventListener("click",(e)=>{
+        submitForm(e)
+    })
 }
 
-function renderEditForm(employees) {
+function renderEditForm(employeeID) {
+    const employee = findEmployeeById(employees, employeeID)
     mark(document.querySelector("#editForm"))
     clearRender()
-    const formElement = createFormElement()
-    const tableElement = createTableElement(employees)
+    const formElement = createFormElement(employeeID)
+    const tableElement = createTableElement([employee])
     renderHere.appendChild(formElement)
+    updateFormWithEmployeeData(employee)
     renderHere.appendChild(tableElement)
+    const submitButton = document.querySelector("input[type='submit']")
+    submitButton.addEventListener("click",(e)=>{
+        submitForm(e)
+    })
 }
 
 function mark(button) {
@@ -81,4 +92,41 @@ function mark(button) {
         el.classList.remove("bg-slate-950", "text-sky-50")
         button.classList.add("bg-slate-950", "text-sky-50")
     })
+}
+
+function findEmployeeById(employeesArray, targetId) {
+    return employeesArray.find(employee => employee.id.toString() === targetId.toString());
+}
+
+function updateFormWithEmployeeData(employee) {
+    if (employee) {
+        // Assuming there are input and radio elements in your form with specific ids
+        document.getElementById('name').value = employee.name;
+        document.getElementById('age').value = employee.age;
+        document.getElementById('department').value = employee.department;
+        document.getElementById('position').value = employee.position;
+
+        document.getElementById(employee.gender).checked = true;
+
+        // Assuming there is an input element for birthday with id 'birthday'
+        document.getElementById('birthday').value = employee.birthday;
+    }
+}
+
+function generateUniqueId() {
+    const timestamp = Date.now().toString(36); // Convert current timestamp to base36
+    const randomString = Math.random().toString(36).substr(2, 5); // Random string (excluding "0." at the beginning)
+
+    return `${timestamp}-${randomString}`;
+}
+
+function replaceEmployee(employeesArray, idToReplace, newEmployee) {
+    const indexToReplace = employeesArray.findIndex(employee => employee.id.toString() === idToReplace.toString());
+
+    if (indexToReplace !== -1) {
+        employeesArray[indexToReplace] = newEmployee;
+    }
+}
+function addNewEmployee(employeesArray, newEmployee) {
+    employeesArray.push(newEmployee);
 }
