@@ -69,6 +69,7 @@ function renderForm() {
     submitButton.addEventListener("click",(e)=>{
         submitForm(e)
     })
+    clearInputs()
 }
 
 function renderEditForm(employeeID) {
