@@ -6,17 +6,17 @@
   <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     name="viewport">
   <meta content="ie=edge" http-equiv="X-UA-Compatible">
-  <link href="/dist/output.css" rel="stylesheet">
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <!-- <link href="/dist/output.css" rel="stylesheet"> -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="/assets/styles/style.css" rel="stylesheet">
   <link href="/assets/icomoon/style.css" rel="stylesheet">
-  <title>Input</title>
+  <title>HR Management</title>
 </head>
 
 <body>
-  <div class="flex">
+  <div class="flex pl-[300px]">
     <aside
-      class="float-left border-r border-gray-300 flex h-screen max-w-[20rem] flex-col bg-gray-100 p-4 text-gray-300">
+      class="fixed left-0 float-left border-r border-gray-300 flex h-screen max-w-[20rem] flex-col bg-gray-100 p-4 text-gray-300">
       <div class="p-4 mb-2">
         <h5 class="block  text-2xl antialiased  font-semibold leading-snug tracking-normal text-gray-900">
           Dashboard
@@ -27,7 +27,7 @@
         <div class="dashboard flex flex-col text-3xl">
           <button
             class="flex items-center text-xl w-full p-3 gap-4 leading-tight transition-all rounded-lg outline-none text-start hover:bg-gray-300 hover:bg-opacity-80 hover:text-gray-900  focus:bg-slate-950 focus:text-sky-50"
-            id="home" onclick="">
+            id="home" onclick="renderGraphs()">
             <span class="icon-home text-2xl"></span>
             Home
           </button>
@@ -62,9 +62,12 @@
       <!-- to render elements -->
     </div>
   </div>
-  <script src="/js/dataBase.js"></script>
-  <script src="components/form/form.js"></script>
+
+  <script src="node_modules/chart.js/dist/chart.umd.js"></script>
+  <script src="js/dataBase.js"></script>
+  <script src="components/card/card.js"></script>
   <script src="components/table/table.js"></script>
+  <script src="components/form/form.js"></script>
   <script src="js/main.js"></script>
 </body>
 

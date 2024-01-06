@@ -4,6 +4,18 @@ function clearRender() {
   renderTag.innerHTML = ``
 }
 
+function renderGraphs() {
+  mark(document.querySelector("#home"))
+  clearRender()
+  const div = document.createElement("div")
+  div.setAttribute("id", "graphs")
+  div.setAttribute("class", "flex flex-row flex-wrap w-full h-full gap-10 p-10")
+  renderTag.appendChild(div)
+  generateNumberOfEmployeesGraph(div)
+  generateNumberOfGenders(div)
+  genereateAverageAges(div)
+}
+
 function renderTable(employees) {
   mark(document.querySelector("#table"))
   clearRender()
@@ -46,4 +58,12 @@ function mark(button) {
     button.classList.add("bg-slate-950", "text-sky-50")
   })
 }
+
+
+function beforeLoad() {
+  renderGraphs()
+}
+
+window.onbeforeload = beforeLoad()
+
 
