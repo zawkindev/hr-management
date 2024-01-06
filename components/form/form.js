@@ -1,9 +1,9 @@
 function createFormElement(employeeID) {
-    const form = document.createElement("form")
-    form.setAttribute("class", "flex flex-col justify-center items-center gap-10 border border-gray-300 p-10 w-fit rounded-xl")
-    form.setAttribute("id", employeeID)
-    // language=HTML
-    form.innerHTML = `
+  const form = document.createElement("form")
+  form.setAttribute("class", "flex flex-col justify-center items-center gap-10 border border-gray-300 p-10 w-fit rounded-xl")
+  form.setAttribute("id", employeeID)
+  // language=HTML
+  form.innerHTML = `
         <div class="grid grid-cols-2 gap-10 box-border w-fit">
             <div class="flex flex-col justify-between">
                 <label class="block antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900"
@@ -125,66 +125,66 @@ function createFormElement(employeeID) {
     `
 
 
-    return form
+  return form
 }
 
 function submitForm(e) {
-    // Retrieve values
-    e.preventDefault()
-    const id = document.querySelector('form').id
-    const name = document.getElementById('name').value;
-    const age = document.getElementById('age').value;
-    const department = document.getElementById('department').value;
-    const position = document.getElementById('position').value;
-    const birthday = document.getElementById('birthday').value;
+  // Retrieve values
+  e.preventDefault()
+  const id = document.querySelector('form').id
+  const name = document.getElementById('name').value;
+  const age = document.getElementById('age').value;
+  const department = document.getElementById('department').value;
+  const position = document.getElementById('position').value;
+  const birthday = document.getElementById('birthday').value;
 
-    // Retrieve gender
-    const genderElements = document.querySelectorAll("input[type='radio']");
-    let gender;
-    for (const element of genderElements) {
-        if (element.checked) {
-            gender = element.id;
-            break;
-        }
+  // Retrieve gender
+  const genderElements = document.querySelectorAll("input[type='radio']");
+  let gender;
+  for (const element of genderElements) {
+    if (element.checked) {
+      gender = element.id;
+      break;
     }
-    const employeeObject = {
-        id: id,
-        name: name,
-        age: age,
-        gender: gender,
-        department: department,
-        position: position,
-        birthday: birthday
-    }
+  }
+  const employeeObject = {
+    id: id,
+    name: name,
+    age: age,
+    gender: gender,
+    department: department,
+    position: position,
+    birthday: birthday
+  }
 
-    if (findEmployeeById(employees, id)) {
-        replaceEmployee(employees, id, employeeObject)
-        const renderHere= document.querySelector("#render")
-        renderHere.querySelector("table").remove()
-        renderHere.appendChild(createTableElement([employeeObject]))
-        saveToLocalStorage(employees)
-    } else {
-        addNewEmployee(employees, employeeObject)
-        const renderHere= document.querySelector("#render")
-        try{
-            renderHere.querySelector("table").remove()
-        }catch (e) {
-            // console.log(e)
-        }
-        renderHere.appendChild(createTableElement([employeeObject]))
-        saveToLocalStorage(employees)
-        clearInputs()
+  if (findEmployeeById(employees, id)) {
+    replaceEmployee(employees, id, employeeObject)
+    const renderHere = document.querySelector("#render")
+    renderHere.querySelector("table").remove()
+    renderHere.appendChild(createTableElement([employeeObject]))
+    saveToLocalStorage(employees)
+  } else {
+    addNewEmployee(employees, employeeObject)
+    const renderHere = document.querySelector("#render")
+    try {
+      renderHere.querySelector("table").remove()
+    } catch (e) {
+      // console.log(e)
     }
+    renderHere.appendChild(createTableElement([employeeObject]))
+    saveToLocalStorage(employees)
+    clearInputs()
+  }
 }
 
 function clearInputs() {
-    const inputElements = document.querySelectorAll('input, select');
+  const inputElements = document.querySelectorAll('input, select');
 
-    inputElements.forEach(input => {
-        if (input.type === 'text' || input.type === 'number' || input.type === 'date' || input.type === 'select-one') {
-            input.value = '';
-        } else if (input.type === 'radio' || input.type === 'checkbox') {
-            input.checked = false;
-        }
-    });
+  inputElements.forEach(input => {
+    if (input.type === 'text' || input.type === 'number' || input.type === 'date' || input.type === 'select-one') {
+      input.value = '';
+    } else if (input.type === 'radio' || input.type === 'checkbox') {
+      input.checked = false;
+    }
+  });
 }
