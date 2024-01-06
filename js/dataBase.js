@@ -46,6 +46,8 @@ const employees = () => sortEmployeesAlphabetically(fetchFromLocalStorage()) || 
   },
 ])
 
+const dataForSaving = employees()
+
 function saveToLocalStorage(data) {
   try {
     const serializedData = JSON.stringify(data);
@@ -105,7 +107,9 @@ function groupEmployeesByDepartment(employees) {
 
 function sortEmployeesAlphabetically(employees) {
   // Use the sort method to sort employees alphabetically by their names
-  employees.sort((a, b) => a.department.localeCompare(b.department));
+  if (employees) {
+    employees.sort((a, b) => a.department.localeCompare(b.department));
+  }
 
   return employees;
 }
