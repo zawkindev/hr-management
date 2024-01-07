@@ -1,51 +1,4 @@
-let employees = fetchFromLocalStorage() || [
-  {
-    id: 1,
-    name: "John Doe",
-    age: 30,
-    department: "IT",
-    position: "Software Engineer",
-    gender: "Male",
-    birthday: "1992-05-15"
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    age: 28,
-    department: "Marketing",
-    position: "Marketing Specialist",
-    gender: "Female",
-    birthday: "1994-09-22"
-  },
-  {
-    id: 3,
-    name: "Bob Johnson",
-    age: 35,
-    department: "Finance",
-    position: "Financial Analyst",
-    gender: "Male",
-    birthday: "1987-11-10"
-  },
-  {
-    id: 4,
-    name: "Alice Thompson",
-    age: 25,
-    department: "HR",
-    position: "HR Coordinator",
-    gender: "Female",
-    birthday: "1996-03-28"
-  },
-  {
-    id: 5,
-    name: "Chris Miller",
-    age: 32,
-    department: "IT",
-    position: "Systems Engineer",
-    gender: "Male",
-    birthday: "1989-08-03"
-  },
-]
-
+let employees = fetchFromLocalStorage()
 
 
 
@@ -209,7 +162,7 @@ function saveToLocalStorage(data) {
   try {
     const serializedData = JSON.stringify(data);
     localStorage.setItem("hr-management", serializedData);
-    employees = data
+    employees = fetchFromLocalStorage()
     console.log(`Data saved to local storage`);
   } catch (error) {
     console.error("Error saving data to local storage:", error);
@@ -222,7 +175,53 @@ function fetchFromLocalStorage() {
     const serializedData = localStorage.getItem("hr-management");
     if (serializedData === null) {
       console.log(`No data found in local storage`);
-      return null;
+      return [
+        {
+          id: 1,
+          name: "John Doe",
+          age: 30,
+          department: "IT",
+          position: "Software Engineer",
+          gender: "Male",
+          birthday: "1992-05-15"
+        },
+        {
+          id: 2,
+          name: "Jane Smith",
+          age: 28,
+          department: "Marketing",
+          position: "Marketing Specialist",
+          gender: "Female",
+          birthday: "1994-09-22"
+        },
+        {
+          id: 3,
+          name: "Bob Johnson",
+          age: 35,
+          department: "Finance",
+          position: "Financial Analyst",
+          gender: "Male",
+          birthday: "1987-11-10"
+        },
+        {
+          id: 4,
+          name: "Alice Thompson",
+          age: 25,
+          department: "HR",
+          position: "HR Coordinator",
+          gender: "Female",
+          birthday: "1996-03-28"
+        },
+        {
+          id: 5,
+          name: "Chris Miller",
+          age: 32,
+          department: "IT",
+          position: "Systems Engineer",
+          gender: "Male",
+          birthday: "1989-08-03"
+        },
+      ];
     }
     const data = JSON.parse(serializedData);
     console.log(`Data fetched from local storage`);
