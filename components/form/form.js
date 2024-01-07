@@ -157,14 +157,14 @@ function submitForm(e) {
     birthday: birthday
   }
 
-  if (findEmployeeById(dataForSaving, id)) {
-    replaceEmployee(dataForSaving, id, employeeObject)
+  if (findEmployeeById(employees, id)) {
+    replaceEmployee(employees, id, employeeObject)
     const renderHere = document.querySelector("#render")
     renderHere.querySelector("table").remove()
     renderHere.appendChild(createTableElement([employeeObject]))
-    saveToLocalStorage(dataForSaving)
+    saveToLocalStorage(employees)
   } else {
-    addNewEmployee(employees(), employeeObject)
+    addNewEmployee(employees, employeeObject)
     const renderHere = document.querySelector("#render")
     try {
       renderHere.querySelector("table").remove()
@@ -172,8 +172,7 @@ function submitForm(e) {
       // console.log(e)
     }
     renderHere.appendChild(createTableElement([employeeObject]))
-    saveToLocalStorage(dataForSaving)
-    console.log(fetchFromLocalStorage())
+    saveToLocalStorage(employees)
     clearInputs()
   }
 }

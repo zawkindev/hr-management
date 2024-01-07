@@ -1,10 +1,10 @@
-function generateNumberOfEmployeesGraph(graphsArea) {
+function generateNumberOfEmployeesGraph(graphsTag) {
   const graphsElement = document.createElement("div")
-  graphsElement.setAttribute("class", `w-[${filter(employees(), "department").length + 1}00px] h-96 bg-slate-950 rounded-xl`)
+  graphsElement.setAttribute("class", `w-[${filter(employees, "department").length + 1}00px] h-96 bg-slate-950 rounded-xl`)
   const canvasElement = document.createElement("canvas")
   canvasElement.setAttribute("id", "numberOfEmployees")
   graphsElement.appendChild(canvasElement)
-  graphsArea.appendChild(graphsElement)
+  graphsTag.appendChild(graphsElement)
   const canvas = document.getElementById("numberOfEmployees")
   const ctx = canvas.getContext('2d');
 
@@ -12,7 +12,7 @@ function generateNumberOfEmployeesGraph(graphsArea) {
   const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: filter(employees(), "department"),
+      labels: filter(employees, "department"),
       datasets: [{
         label: 'Number of Employees',
         data: getNumberOfEmployeesInDepartments(employees),
@@ -59,13 +59,13 @@ function generateNumberOfEmployeesGraph(graphsArea) {
   });
 }
 
-function generateNumberOfGenders(graphsArea) {
+function generateNumberOfGenders(graphsTag) {
   const graphsElement = document.createElement("div")
   graphsElement.setAttribute("class", "w-[300px] h-96 bg-slate-950 rounded-xl")
   const canvasElement = document.createElement("canvas")
   canvasElement.setAttribute("id", "numberOfGenders")
   graphsElement.appendChild(canvasElement)
-  graphsArea.appendChild(graphsElement)
+  graphsTag.appendChild(graphsElement)
   const canvas = document.getElementById("numberOfGenders")
   const ctx = canvas.getContext('2d');
 
@@ -75,7 +75,7 @@ function generateNumberOfGenders(graphsArea) {
       labels: ["Females", "Males"],
       datasets: [{
         label: 'Number of Males and Females',
-        data: countGenders(employees()),
+        data: countGenders(employees),
         backgroundColor: ["#ebfdf0", "#b6c9b9"],
         borderRadius: 30,
         borderSkipped: false,
@@ -120,23 +120,22 @@ function generateNumberOfGenders(graphsArea) {
 }
 
 
-function genereateAverageAges(graphsArea) {
+function genereateAverageAges(graphsTag) {
   const graphsElement = document.createElement("div")
-  graphsElement.setAttribute("class", `w-[${filter(employees(), "department").length + 1}00px] h-96 bg-slate-950 rounded-xl`)
+  graphsElement.setAttribute("class", `w-[${filter(employees, "department").length + 1}00px] h-96 bg-slate-950 rounded-xl`)
   const canvasElement = document.createElement("canvas")
   canvasElement.setAttribute("id", "averageAges")
   graphsElement.appendChild(canvasElement)
-  graphsArea.appendChild(graphsElement)
+  graphsTag.appendChild(graphsElement)
   const canvas = canvasElement
   const ctx = canvas.getContext('2d');
-
   const myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: filter(employees(), "department"),
+      labels: filter(employees, "department"),
       datasets: [{
         label: 'Average age of employees',
-        data: getAverageAgeByDepartment(employees()),
+        data: getAverageAgeByDepartment(employees),
         backgroundColor: ["#ebfdf0", "#b6c9b9"],
         borderRadius: 30,
         borderSkipped: false,

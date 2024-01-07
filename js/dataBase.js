@@ -1,4 +1,4 @@
-const employees = () => sortEmployeesAlphabetically(fetchFromLocalStorage()) || sortEmployeesAlphabetically([
+let employees = fetchFromLocalStorage() || [
   {
     id: 1,
     name: "John Doe",
@@ -44,34 +44,58 @@ const employees = () => sortEmployeesAlphabetically(fetchFromLocalStorage()) || 
     gender: "Male",
     birthday: "1989-08-03"
   },
-])
+]
 
-const dataForSaving = employees()
 
-function saveToLocalStorage(data) {
-  try {
-    const serializedData = JSON.stringify(data);
-    localStorage.setItem("hr-management", serializedData);
-    console.log(`Data saved to local storage`);
-  } catch (error) {
-    console.error("Error saving data to local storage:", error);
-  }
+
+
+
+function generateUniqueId() {
+  const randomString = Math.random(); // Random string (excluding "0." at the beginning)
+
+  return randomString;
 }
 
-// Function to fetch data from local storage
-function fetchFromLocalStorage() {
-  try {
-    const serializedData = localStorage.getItem("hr-management");
-    if (serializedData === null) {
-      console.log(`No data found in local storage`);
-      return null;
-    }
-    const data = JSON.parse(serializedData);
-    console.log(`Data fetched from local storage`);
-    return data;
-  } catch (error) {
-    console.error("Error fetching data from local storage:", error);
-    return null;
+function replaceEmployee(employeesArray, idToReplace, newEmployee) {
+  const indexToReplace = employeesArray.findIndex(employee => employee.id.toString() === idToReplace.toString());
+
+  if (indexToReplace !== -1) {
+    employeesArray[indexToReplace] = newEmployee;
+  }
+}
+function addNewEmployee(employeesArray, newEmployee) {
+  employeesArray.push(newEmployee);
+}
+
+function deleteEmployee(employeeID) {
+
+  // localStorage.clear()
+  const indexToDelete = employees.findIndex(employee => employee.id.toString() === employeeID.toString());
+  if (indexToDelete !== -1) {
+    employees.splice(indexToDelete, 1);
+    console.log(`Employee with ID ${employeeID} deleted`);
+  } else {
+    console.log(`Employee with ID ${employeeID} not found`);
+  }
+  document.querySelector("table").remove()
+  renderTag.appendChild(createTableElement(employees))
+  saveToLocalStorage(employees)
+}
+
+
+function findEmployeeById(employeesArray, targetId) {
+  return employeesArray.find(employee => employee.id.toString() === targetId.toString());
+}
+
+function updateFormWithEmployeeData(employee) {
+  if (employee) {
+    // Assuming there are input and radio elements in your form with specific ids
+    document.getElementById('name').value = employee.name;
+    document.getElementById('age').value = employee.age;
+    document.getElementById('department').value = employee.department;
+    document.getElementById('position').value = employee.position;
+    document.getElementById(employee.gender).checked = true;
+    document.getElementById('birthday').value = employee.birthday;
   }
 }
 
@@ -116,28 +140,14 @@ function sortEmployeesAlphabetically(employees) {
 
 function getNumberOfEmployeesInDepartments(employees) {
   const array = []
-  Object.values(groupEmployeesByDepartment(employees())).forEach(el => {
+  Object.values(groupEmployeesByDepartment(employees)).forEach(el => {
     array.push(Object.keys(el).length)
   })
   return array
 }
 
-// function getAverageAge
 
-function countGenders(employees) {
-  let males = 0;
-  let females = 0;
 
-  for (const employee of employees) {
-    if (employee.gender === "Male") {
-      males++;
-    } else if (employee.gender === "Female") {
-      females++;
-    }
-  }
-
-  return [females, males];
-}
 
 function getAverageAgeByDepartment(employees) {
   // Create a map to store the total age and count of employees in each department
@@ -174,5 +184,53 @@ function getAverageAgeByDepartment(employees) {
 }
 
 
+function countGenders(employees) {
+  let males = 0;
+  let females = 0;
 
-console.log(getAverageAgeByDepartment(employees()), filter(employees(), "department"))
+  for (const employee of employees) {
+    if (employee.gender === "Male") {
+      males++;
+    } else if (employee.gender === "Female") {
+      females++;
+    }
+  }
+
+  return [females, males];
+}
+
+
+
+
+
+
+
+function saveToLocalStorage(data) {
+  try {
+    const serializedData = JSON.stringify(data);
+    localStorage.setItem("hr-management", serializedData);
+    employees = data
+    console.log(`Data saved to local storage`);
+  } catch (error) {
+    console.error("Error saving data to local storage:", error);
+  }
+}
+
+// Function to fetch data from local storage
+function fetchFromLocalStorage() {
+  try {
+    const serializedData = localStorage.getItem("hr-management");
+    if (serializedData === null) {
+      console.log(`No data found in local storage`);
+      return null;
+    }
+    const data = JSON.parse(serializedData);
+    console.log(`Data fetched from local storage`);
+    return data;
+  } catch (error) {
+    console.error("Error fetching data from local storage:", error);
+    return null;
+  }
+}
+
+
