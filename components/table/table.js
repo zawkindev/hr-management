@@ -118,8 +118,8 @@ function createTableElement(employees) {
             </p>
           </td>
           <td class="p-4  items-center content-center gap-7 h-max">
-            <button onclick="renderEditForm(${user.id})" class="edit-button block antialiased font-medium leading-normal text-blue-500">Edit</button>
-            <button onclick="deleteEmployee(${user.id})" class="block antialiased font-medium leading-normal text-red-500">Delete</button>
+            <button onclick="openModal('edit-modal',${user.id})" class="edit-button block antialiased font-medium leading-normal text-blue-500">Edit</button>
+            <button onclick="openModal('delete-modal',${user.id})" class="block antialiased font-medium leading-normal text-red-500">Delete</button>
           </td>
         </tr>
         `;

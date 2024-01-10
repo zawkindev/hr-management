@@ -1,4 +1,4 @@
-const renderTag = document.querySelector("#render")
+let renderTag = document.querySelector("#render")
 
 function clearRender() {
   renderTag.innerHTML = ``
@@ -9,11 +9,17 @@ function renderGraphs() {
   clearRender()
   const div = document.createElement("div")
   div.setAttribute("id", "graphs")
-  div.setAttribute("class", "flex flex-row flex-wrap w-full h-full gap-10 p-10")
-  renderTag.appendChild(div)
-  generateNumberOfEmployeesGraph(div)
-  generateNumberOfGenders(div)
-  genereateAverageAges(div)
+  div.setAttribute("class", "flex flex-row flex-wrap w-full h-full gap-10")
+  if (Object.keys(employees).length === 0) {
+    div.innerHTML = `<h1 class="text-6xl">DataBase is empty</h2>`
+    div.classList.add("justify-center", "items-center")
+    renderTag.appendChild(div)
+  } else {
+    renderTag.appendChild(div)
+    generateNumberOfEmployeesGraph(div)
+    generateNumberOfGenders(div)
+    genereateAverageAges(div)
+  }
 }
 
 function renderTable(employees) {
@@ -38,8 +44,9 @@ function renderForm() {
 
 function renderEditForm(employeeID) {
   const employee = findEmployeeById(employees, employeeID)
-  mark(document.querySelector("#editForm"))
+  renderTag = document.querySelector("#edit-form")
   clearRender()
+  renderTag.innerHTML = ``
   const formElement = createFormElement(employeeID)
   const tableElement = createTableElement([employee])
   renderTag.appendChild(formElement)
@@ -48,6 +55,8 @@ function renderEditForm(employeeID) {
   const submitButton = document.querySelector("input[type='submit']")
   submitButton.addEventListener("click", (e) => {
     submitForm(e)
+    renderTable(employees)
+    closeModal("edit-modal")
   })
 }
 
@@ -60,10 +69,4 @@ function mark(button) {
 }
 
 
-function beforeLoad() {
-  renderGraphs()
-}
-
-window.onbeforeload = beforeLoad()
-
-
+window.onbeforeload = renderGraphs()
